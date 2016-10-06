@@ -47,13 +47,13 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
 //    var historyShepardViewController: UIViewController!
 //    var shepardsModeViewController: UIViewController!
     
-    override required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
-//    required init?(coder aDecoder: NSCoder) {
+//    override required init(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
 //    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +86,8 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
         
         viewFooter.addSubview(viewFooterImage)
 
-        let exitButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        let exitButton: UIButton = UIButton(type:UIButtonType.Custom) as UIButton
+//        .buttonWithType(UIButtonType.Custom) as! UIButton
         exitButton.frame = CGRectMake(0.0, viewFooter.frame.size.height - 44.0, self.view.frame.size.width, 44.0)
         exitButton.addTarget(self, action: Selector("onExitButton:"), forControlEvents: UIControlEvents.TouchUpInside)
         exitButton.setTitle("ВЫХОД", forState: UIControlState.Normal)

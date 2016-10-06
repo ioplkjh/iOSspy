@@ -10,6 +10,10 @@
 #import "GetCheckSMSCodeRequest.h"
 #import "GetLoginRequest.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 #define kOffsetRegistrationDifferens        is_4_inch() ? 40.f : 20.f
 
 CG_INLINE BOOL is_4_inch()
@@ -26,6 +30,7 @@ CG_INLINE BOOL is_4_inch()
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 
+@property (weak, nonatomic) IBOutlet UIButton *getCodeButton;
 @end
 
 @implementation RegisterPassViewController
@@ -48,10 +53,29 @@ CG_INLINE BOOL is_4_inch()
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+
     [self setDefaultViewCenter:self.view.center];
     [self.textField setText:self.pass];
+    self.getCodeButton.enabled = NO;
+    [self performSelector:@selector(unlockButton) withObject:nil afterDelay:40];
+    
 }
 
+-(void)unlockButton
+{
+    self.getCodeButton.enabled = YES;
+}
 #pragma mark - Keyboard Notyfications Actions -
 
 -(void)keyboardWillHide:(NSNotification*)notyfication
@@ -123,16 +147,20 @@ CG_INLINE BOOL is_4_inch()
         NSString *accessToken = json[@"data"];
         if(accessToken.length > 0)
         {
+//            NSString *locationID = json[@""];
             [SVProgressHUD showWithStatus:@"Загрузка"];
             NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
             [settings setObject:accessToken forKey:@"AccessToken"];
-            [settings setBool:YES         forKey:@"isEnableAuroRegister"          ];
+//            [settings setObject:locationID  forKey:@"locationID"];
+            [settings setBool:YES           forKey:@"isEnableAuroRegister"];
             
             [settings synchronize];
             [self.navigationController dismissViewControllerAnimated:NO completion:^{
                 
             }];
         }
+        
+        
     } errorHandler:^{
          [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Не правильный код" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     }];

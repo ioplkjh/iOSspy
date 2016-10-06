@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Carwash/WashPageViewController.m"
+            timestampString = "472167415.381457"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "902"
+            endingLineNumber = "902"
+            landmarkName = "-onOrderConformButton:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Carwash/LoginViewController.m"
+            timestampString = "471907560.771694"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-onLoginButton:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Carwash/NetworkCore/GetClientOrderAdd.m"
+            timestampString = "472035300.343574"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "-getClientOrderAdd:day_id:time_id:car_id:model_id:car_number:services:completionHandler:errorHandler:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__121-[GetClientOrderAdd getClientOrderAdd:day_id:time_id:car_id:model_id:car_number:services:completionHandler:errorHandler:]_block_invoke120"
+                  moduleName = "CARWASH"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/KaboomSpeed/Documents/FreeLance/BitBucket/carwash/Carwash/Carwash/NetworkCore/GetClientOrderAdd.m"
+                  timestampString = "472167987.809223"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "38">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__121-[GetClientOrderAdd getClientOrderAdd:day_id:time_id:car_id:model_id:car_number:services:completionHandler:errorHandler:]_block_invoke_2121"
+                  moduleName = "CARWASH"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/KaboomSpeed/Documents/FreeLance/BitBucket/carwash/Carwash/Carwash/NetworkCore/GetClientOrderAdd.m"
+                  timestampString = "472167987.809649"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

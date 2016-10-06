@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Detail Info Map View Controller-->
+        <!--Карта-->
         <scene sceneID="cxk-ra-Gtu">
             <objects>
-                <viewController storyboardIdentifier="DetailInfoMapViewController" id="gEt-Ye-VPX" customClass="DetailInfoMapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailInfoMapViewController" title="Карта" id="gEt-Ye-VPX" customClass="DetailInfoMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oe8-bE-50K"/>
                         <viewControllerLayoutGuide type="bottom" id="Hhf-hE-Ldy"/>

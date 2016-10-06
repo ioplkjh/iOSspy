@@ -17,6 +17,11 @@
 #import "OrderCommentCell.h"
 #import "OrderStableCell.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 #define kOrderCommentCellID @"orderCommentCellID"
 #define kOrderStableCellID  @"orderStableCellID"
 
@@ -39,6 +44,18 @@
     [self setNavigationBarItem];
     [self request];
     [self setTitle:@"МОИ ЗАКАЗЫ"];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 
 #pragma mark - UITableViewDelegate & Datasource -
@@ -64,7 +81,6 @@
     
     
     return 100;
-
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -77,6 +93,7 @@
     NSDictionary *dictInfo = self.infoArray[indexPath.row];
    // order_status_id = 1 // new
     NSInteger status = [dictInfo[@"order_status_id"] integerValue];
+    NSString *statusText = dictInfo[@"order_status"] ? [NSString stringWithFormat:@"%@:",dictInfo[@"order_status"][@"status"]]:@"Заказ:";
     BOOL isComment = NO;
     if(![dictInfo[@"review"] isKindOfClass:[NSNull class]])
     {
@@ -88,12 +105,16 @@
         OrderCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:kOrderCommentCellID];
         cell.orderStatusLabel.adjustsFontSizeToFitWidth = YES;
         
-        if(status == 1)
-            cell.orderStatusLabel.text = @"Текущий заказ:";
+        if (status == -1)
+            cell.orderStatusLabel.text = @"Не подтвержденный:";
+        else if(status == 1)
+            cell.orderStatusLabel.text = @"Подтвержденный заказ:";
+        else if(status == 2)
+            cell.orderStatusLabel.text = @"Выполненый заказ:";
         else if(status == 3)
             cell.orderStatusLabel.text = @"Отмененный заказ:";
-        else
-            cell.orderStatusLabel.text = @"Выполненый заказ:";
+        else if(status == 4)
+            cell.orderStatusLabel.text = @"Отказ мойки:";
         
         if(![dictInfo[@"wash_time"] isKindOfClass:[NSNull class]] && dictInfo[@"wash_time"] != nil)
         {
@@ -147,13 +168,17 @@
         OrderStableCell *cell = [tableView dequeueReusableCellWithIdentifier:kOrderStableCellID];
         cell.orderStatusLabel.adjustsFontSizeToFitWidth = YES;
         
-        if(status == 1)
-            cell.orderStatusLabel.text = @"Текущий заказ:";
+        if (status == -1)
+            cell.orderStatusLabel.text = @"Не подтвержденный:";
+        else if(status == 1)
+            cell.orderStatusLabel.text = @"Подтвержденный заказ:";
+        else if(status == 2)
+            cell.orderStatusLabel.text = @"Выполненый заказ:";
         else if(status == 3)
             cell.orderStatusLabel.text = @"Отмененный заказ:";
-        else
-            cell.orderStatusLabel.text = @"Выполненый заказ:";
-        
+        else if(status == 4)
+            cell.orderStatusLabel.text = @"Отказ мойки:";
+
         if(![dictInfo[@"wash_time"] isKindOfClass:[NSNull class]] && dictInfo[@"wash_time"] != nil)
         {
             NSDictionary *dict = dictInfo[@"wash_time"];
@@ -185,7 +210,36 @@
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"OrderBoard" bundle:nil];
     DetailOrderViewController *dtVC = [storyboard instantiateViewControllerWithIdentifier:@"DetailOrderViewController"];
-    dtVC.dictInfo = dictInfo;
+    
+    BOOL isComment = NO;
+    if(![dictInfo[@"review"] isKindOfClass:[NSNull class]])
+    {
+        isComment = YES;
+    }
+    
+    if(isComment)
+    {
+        NSString *comment = dictInfo[@"review"][@"text"];
+        
+        BOOL containComment = NO;
+        
+        if(![comment isKindOfClass:[NSNull class]] && comment != nil )
+        {
+            if(comment.length)
+            {
+                containComment = YES;
+            }
+        }
+        
+        dtVC.isCommented = containComment;
+        dtVC.dictInfo = dictInfo;
+    }
+    else
+    {
+        dtVC.isCommented = NO;
+        dtVC.dictInfo = dictInfo;
+    }
+
     [self setTitle:@" "];
     [self.navigationController pushViewController:dtVC animated:YES];
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Марка Модель Номер-->
@@ -19,7 +19,6 @@
                         <subviews>
                             <searchBar contentMode="redraw" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnj-5x-SfQ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Ugs-Re-VIU"/>
                                 </constraints>
@@ -31,7 +30,6 @@
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eZb-4p-EEA">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="qZT-Hy-7cu">
                                     <rect key="frame" x="0.0" y="66" width="600" height="57"/>
@@ -39,7 +37,6 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sn-xk-JGh">
                                             <rect key="frame" x="8" y="7" width="584" height="42"/>
-                                            <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="tintColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Добавить машину">
@@ -51,7 +48,6 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="8sn-xk-JGh" firstAttribute="top" secondItem="qZT-Hy-7cu" secondAttribute="top" constant="7" id="Luh-hh-898"/>
@@ -70,21 +66,18 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mercedens benc, 600" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpO-VK-yCp">
                                                     <rect key="frame" x="10" y="8" width="580" height="28"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.28235294119999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-ua-Px0">
                                                     <rect key="frame" x="10" y="43" width="580" height="1"/>
-                                                    <animations/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="xI5-fS-SrJ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="VIo-ua-Px0" firstAttribute="leading" secondItem="a8h-Sb-EJv" secondAttribute="leading" constant="10" id="2L7-aa-EEe"/>
                                                 <constraint firstAttribute="trailing" secondItem="VIo-ua-Px0" secondAttribute="trailing" constant="10" id="F22-CI-Su3"/>
@@ -95,7 +88,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="VIo-ua-Px0" secondAttribute="bottom" id="vQA-FY-AKe"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                         <connections>
                                             <outlet property="carLabel" destination="BpO-VK-yCp" id="T1L-tH-Sjt"/>
                                             <outlet property="underView" destination="VIo-ua-Px0" id="kfS-3k-IfU"/>
@@ -108,7 +100,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Fnj-5x-SfQ" secondAttribute="trailing" id="8MS-ny-BXk"/>
@@ -131,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="59"/>
         </scene>
-        <!--Add Car Step One View Controller-->
+        <!--Добавить машину шаг1-->
         <scene sceneID="3o1-5O-rXf">
             <objects>
-                <viewController storyboardIdentifier="AddCarStepOneViewController" id="flP-0V-D1n" customClass="AddCarStepOneViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddCarStepOneViewController" title="Добавить машину шаг1" id="flP-0V-D1n" customClass="AddCarStepOneViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jTr-9I-sG6"/>
                         <viewControllerLayoutGuide type="bottom" id="IQu-aM-ghP"/>
@@ -145,7 +136,6 @@
                         <subviews>
                             <searchBar contentMode="redraw" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-vV-gj0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="mwX-Zj-QXz"/>
                                 </constraints>
@@ -157,7 +147,6 @@
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wrw-ft-O7h">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="carInfoTableViewCellID" rowHeight="44" id="Haj-hj-rey" customClass="CarInfoTableViewCell">
@@ -169,18 +158,15 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BMW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5x-dl-glO">
                                                     <rect key="frame" x="10" y="0.0" width="580" height="44"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7X-yM-kQ5">
                                                     <rect key="frame" x="10" y="43" width="580" height="1"/>
-                                                    <animations/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstItem="X5x-dl-glO" firstAttribute="leading" secondItem="f5E-LA-n1K" secondAttribute="leading" constant="10" id="Gx8-Pl-pDf"/>
                                                 <constraint firstItem="X5x-dl-glO" firstAttribute="top" secondItem="f5E-LA-n1K" secondAttribute="top" id="VRm-6T-qX1"/>
@@ -188,7 +174,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="X5x-dl-glO" secondAttribute="bottom" id="pOU-YR-4ez"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                         <connections>
                                             <outlet property="bgView" destination="w7X-yM-kQ5" id="PEO-1n-rRh"/>
                                             <outlet property="carLabel" destination="X5x-dl-glO" id="GRM-u5-Wg8"/>
@@ -201,7 +186,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="wrw-ft-O7h" secondAttribute="trailing" id="6M0-hq-as3"/>
@@ -223,10 +207,10 @@
             </objects>
             <point key="canvasLocation" x="650" y="59"/>
         </scene>
-        <!--Add Car Step Two View Controller-->
+        <!--Добавить машину шаг2-->
         <scene sceneID="z1F-Bz-pT1">
             <objects>
-                <viewController storyboardIdentifier="AddCarStepTwoViewController" id="OAw-lB-xuD" customClass="AddCarStepTwoViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddCarStepTwoViewController" title="Добавить машину шаг2" id="OAw-lB-xuD" customClass="AddCarStepTwoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="flM-EF-wA2"/>
                         <viewControllerLayoutGuide type="bottom" id="I2v-tS-0Up"/>
@@ -237,7 +221,6 @@
                         <subviews>
                             <searchBar contentMode="redraw" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQG-dQ-Qza">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="DQY-yR-njT"/>
                                 </constraints>
@@ -249,7 +232,6 @@
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gWr-fm-RMx">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="carInfoTwoTableViewCellID" rowHeight="44" id="Nsm-FN-DnL" customClass="CarInfoTwoTableViewCell">
@@ -261,18 +243,15 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BMW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJL-UF-uQt">
                                                     <rect key="frame" x="10" y="0.0" width="580" height="44"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tf2-bQ-7mu">
                                                     <rect key="frame" x="10" y="43" width="580" height="1"/>
-                                                    <animations/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="yJL-UF-uQt" secondAttribute="trailing" constant="10" id="N6R-aW-EQw"/>
                                                 <constraint firstItem="yJL-UF-uQt" firstAttribute="leading" secondItem="zzb-Fd-iZC" secondAttribute="leading" constant="10" id="epG-w4-YeZ"/>
@@ -280,7 +259,6 @@
                                                 <constraint firstItem="yJL-UF-uQt" firstAttribute="top" secondItem="zzb-Fd-iZC" secondAttribute="top" id="sl3-Vr-eZB"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <animations/>
                                         <connections>
                                             <outlet property="bgView" destination="Tf2-bQ-7mu" id="QzF-Aw-4Zl"/>
                                             <outlet property="carLabel" destination="yJL-UF-uQt" id="tAi-ye-wuF"/>
@@ -300,7 +278,6 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOi-jM-H4h">
                                                 <rect key="frame" x="10" y="47" width="270" height="1"/>
-                                                <animations/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="4eR-Pa-0mH"/>
@@ -308,7 +285,6 @@
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Государственный номер" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qh-Nc-P7M">
                                                 <rect key="frame" x="10" y="8" width="270" height="34"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="Mfm-Jw-dKB"/>
                                                 </constraints>
@@ -316,9 +292,8 @@
                                                 <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Это последний шаг - укажите, пожалуйста, регистрационный номер автомобиля, чтобы администратор мог идентифицыровать Вас." lineBreakMode="wordWrap" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Km0-sc-VnA">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Это последний шаг - укажите, пожалуйста, регистрационный номер автомобиля, чтобы администратор мог идентифицировать Вас." lineBreakMode="wordWrap" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Km0-sc-VnA">
                                                 <rect key="frame" x="10" y="55" width="272" height="95"/>
-                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="95" id="O5L-lv-hJs"/>
                                                 </constraints>
@@ -331,14 +306,12 @@
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="НОМЕР" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-SP-2iG">
                                                         <rect key="frame" x="8" y="8" width="254" height="30"/>
-                                                        <animations/>
                                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
-                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Fah-Xv-BIH"/>
@@ -350,7 +323,6 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lht-2K-82R">
                                                 <rect key="frame" x="234" y="212" width="46" height="30"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
                                                 <state key="normal" title="Готово">
                                                     <color key="titleColor" red="0.23921568630000001" green="0.69411764710000001" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -362,7 +334,6 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLy-hw-LJl">
                                                 <rect key="frame" x="160" y="212" width="66" height="30"/>
-                                                <animations/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
                                                 <state key="normal" title="Я не хочу">
                                                     <color key="titleColor" red="0.23921568630000001" green="0.69411764710000001" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -373,7 +344,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Km0-sc-VnA" firstAttribute="leading" secondItem="3Y8-48-rfA" secondAttribute="leading" constant="10" id="3PC-Kj-kc5"/>
@@ -393,7 +363,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="0.34000000000000002" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="3Y8-48-rfA" secondAttribute="centerX" id="Faz-Cs-tD9"/>
@@ -403,7 +372,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gWr-fm-RMx" firstAttribute="top" secondItem="CQG-dQ-Qza" secondAttribute="bottom" id="5tQ-w5-GAG"/>

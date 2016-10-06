@@ -7,6 +7,7 @@
 //
 
 #import "DetailOrderViewController.h"
+#import "WashPageViewController.h"
 
 #import "GetCancelOrderRequest.h"
 #import "GetLeaveCommentRequest.h"
@@ -15,6 +16,11 @@
 #import "DetailOrderTopCell.h"
 #import "DetailOrderMiddleCell.h"
 #import "DetailOrderBotCell.h"
+
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 
 #define kNumberOfCells 3
 
@@ -61,6 +67,24 @@
     [self render];
     [self setTitle:@"Заказ"];
  }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
+}
 
 -(void)render
 {
@@ -112,19 +136,21 @@
         case kIndexTop:
         {
             DetailOrderTopCell *cell = [tableView dequeueReusableCellWithIdentifier:kIndexTopID];
+            NSInteger status = [self.dictInfo[@"order_status_id"] integerValue];
             
-            if([self.dictInfo[@"order_status_id"] integerValue] == 1)
-            {
-                cell.statusLabel.text = @"Текущий заказ:";
-            }
-            else if([self.dictInfo[@"order_status_id"] integerValue] == 3)
-            {
-                cell.statusLabel.text = @"Отмененный заказ:";
-            }
-            else
-            {
+            cell.statusLabel.adjustsFontSizeToFitWidth = YES;
+            
+            if (status == -1)
+                cell.statusLabel.text = @"Не подтвержденный:";
+            else if(status == 1)
+                cell.statusLabel.text = @"Подтвержденный заказ:";
+            else if(status == 2)
                 cell.statusLabel.text = @"Выполненый заказ:";
-            }
+            else if(status == 3)
+                cell.statusLabel.text = @"Отмененный заказ:";
+            else if(status == 4)
+                cell.statusLabel.text = @"Отказ мойки:";
+            
             
             cell.titleLabel.text = self.dictInfo[@"car_wash"][@"title"];
             
@@ -158,22 +184,39 @@
         {
             DetailOrderBotCell *cell = [tableView dequeueReusableCellWithIdentifier:kIndexBotID];
             
-            if([self.dictInfo[@"order_status_id"] integerValue] == 1)
+            
+            
+            NSInteger status = [self.dictInfo[@"order_status_id"] integerValue];
+            
+            if (status == -1)
             {
                 cell.commentButton.hidden = YES;
                 cell.canselOrderButton.hidden = NO;
-
             }
-            else if([self.dictInfo[@"order_status_id"] integerValue] == 3)
+            else if(status == 1)
             {
                 cell.commentButton.hidden = YES;
+                cell.canselOrderButton.hidden = NO;
+            }
+            else if(status == 2)
+            {
+                if(self.isCommented == NO)
+                {
+                    cell.commentButton.hidden = NO;
+                }
                 cell.canselOrderButton.hidden = YES;
             }
-            else
+            else if(status == 3)
             {
                 cell.commentButton.hidden = NO;
                 cell.canselOrderButton.hidden = YES;
             }
+            else if(status == 4)
+            {
+                cell.commentButton.hidden = NO;
+                cell.canselOrderButton.hidden = YES;
+            }
+            
             
             [cell.commentButton addTarget:self action:@selector(onCommentButton:) forControlEvents:UIControlEventTouchUpInside];
             [cell.canselOrderButton addTarget:self action:@selector(onCancelButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -189,7 +232,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.row == kIndexTop)
+    {
+        NSDictionary *dict = self.dictInfo[@"car_wash"];
+        UIStoryboard *storyborad = [UIStoryboard storyboardWithName:@"WashPage" bundle:nil];
+        WashPageViewController *washPageViewController = [storyborad instantiateViewControllerWithIdentifier:@"WashPageViewController"];
+        NSInteger typeCarWash = [dict[@"car_wash_type_id"] integerValue];
+        if(typeCarWash == 1)
+        {
+            washPageViewController.isOfflineWash = YES;
+        }
+        washPageViewController.dictInfo = dict;
+        [self.navigationController pushViewController:washPageViewController animated:YES];    }
 }
 
 -(void)onCancelButton:(UIButton *)button

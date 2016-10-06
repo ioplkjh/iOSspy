@@ -10,4 +10,5 @@
 
 @interface ChoiceRegionViewController : UIViewController
 @property (nonatomic, strong) NSMutableDictionary *regionDict;
+@property (nonatomic ,assign) BOOL notShow;
 @end

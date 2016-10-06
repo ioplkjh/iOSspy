@@ -11,6 +11,11 @@
 #import "CarInfoTwoTableViewCell.h"
 #import "GetAllCarModelRequet.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 #define kCarInfoTwoTableViewCellID  @"carInfoTwoTableViewCellID"
 
 @interface AddCarStepTwoViewController ()<UISearchBarDelegate>
@@ -76,6 +81,18 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [self setTitle:@"МАРКА-МОДЕЛЬ-НОМЕР"];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -153,6 +170,63 @@
     }];
 }
 
+-(void)saveDataCarNo:(NSInteger)index
+{
+    NSString *brand = self.brandCar[@"brand"];
+    NSString *model = self.modelArray[index][@"model"];
+    NSString *brandID = self.brandCar[@"id"];
+    NSString *modelID = self.modelArray[index][@"id"];
+    NSString *car_category_id = self.modelArray[index][@"car_category_id"];
+    //    if(self.numberEnterTF.text.length == 0)
+    //    {
+    //        self.numberEnterTF.text = @"";
+    //        [self.numberEnterTF resignFirstResponder];
+    //        [self.bgViewPopup setHidden:YES];
+    //        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    //        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //        [self.tableView reloadData];
+    //        [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Не правильно введен номер" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil] show];
+    //        return;
+    //    }
+    //    else
+    //    {
+    [self.bgViewPopup setHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.bgViewPopup removeFromSuperview];
+    [self.numberEnterTF resignFirstResponder];
+    //    }
+    
+    AppDelegate *appDel = SharedAppDelegate;
+    NSMutableDictionary *savedStock = [[NSMutableDictionary alloc] initWithContentsOfFile:appDel.path];
+    NSMutableArray *myCarsArray = [[savedStock objectForKey:@"MyCars"] mutableCopy];
+    
+    if(myCarsArray == nil)
+        myCarsArray = [@[] mutableCopy];
+    
+    [myCarsArray addObject:@{
+                             @"carBrand":brand,
+                             @"carModel":model,
+                             @"carNumber":@"",
+                             @"carBrandID":brandID,
+                             @"carModelID":modelID,
+                             @"car_category_id":car_category_id
+                             }];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile: appDel.path];
+    
+    [data setObject:[myCarsArray copy] forKey:@"MyCars"];
+    [data writeToFile: appDel.path atomically:YES];
+    
+    NSInteger indexI = 0;
+    if(self.navigationController.viewControllers.count >= 3)
+    {
+        indexI = self.navigationController.viewControllers.count-3;
+    }
+    
+    UIViewController *controller = self.navigationController.viewControllers[indexI];
+    [self.navigationController popToViewController:controller animated:YES];
+}
+
 -(void)saveDataCar:(NSInteger)index
 {
     NSString *brand = self.brandCar[@"brand"];
@@ -160,25 +234,25 @@
     NSString *brandID = self.brandCar[@"id"];
     NSString *modelID = self.modelArray[index][@"id"];
     NSString *car_category_id = self.modelArray[index][@"car_category_id"];
-    if(self.numberEnterTF.text.length == 0)
-    {
-        self.numberEnterTF.text = @"";
-        [self.numberEnterTF resignFirstResponder];
-        [self.bgViewPopup setHidden:YES];
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        [self.tableView reloadData];
-        [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Не правильно введен номер" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil] show];
-        return;
-    }
-    else
-    {
+//    if(self.numberEnterTF.text.length == 0)
+//    {
+//        self.numberEnterTF.text = @"";
+//        [self.numberEnterTF resignFirstResponder];
+//        [self.bgViewPopup setHidden:YES];
+//        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+//        [self.navigationController setNavigationBarHidden:NO animated:YES];
+//        [self.tableView reloadData];
+//        [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Не правильно введен номер" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil] show];
+//        return;
+//    }
+//    else
+//    {
         [self.bgViewPopup setHidden:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         [self.bgViewPopup removeFromSuperview];
         [self.numberEnterTF resignFirstResponder];
-    }
+//    }
     
     AppDelegate *appDel = SharedAppDelegate;
     NSMutableDictionary *savedStock = [[NSMutableDictionary alloc] initWithContentsOfFile:appDel.path];
@@ -209,13 +283,10 @@
     UIViewController *controller = self.navigationController.viewControllers[indexI];
     [self.navigationController popToViewController:controller animated:YES];
 }
+
 - (IBAction)onNoButton:(id)sender
 {
-    self.numberEnterTF.text = @"";
-    [self.numberEnterTF resignFirstResponder];
-    [self.bgViewPopup setHidden:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [self saveDataCarNo:self.currentIndex];
 }
 
 - (IBAction)onDoneButton:(id)sender {

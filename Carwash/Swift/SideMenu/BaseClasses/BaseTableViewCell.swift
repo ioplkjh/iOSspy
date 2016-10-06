@@ -14,15 +14,15 @@ public class BaseTableViewCell : UITableViewCell {
     
     class var identifier: String { return String.className(self) }
     
-    public required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.setup()
-    }
-    
-//    public required init?(coder aDecoder: NSCoder) {
+//    public required init(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
 //        self.setup()
 //    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setup()
+    }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

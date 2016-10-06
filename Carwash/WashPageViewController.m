@@ -19,6 +19,11 @@
 
 #import "LocalNotificationManager.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 //Cells
 #import "TopButtonCell.h"
 #import "InfoWashCell.h"
@@ -77,7 +82,6 @@
 @property (nonatomic,assign) double latWash;
 @property (nonatomic,assign) double lonWash;
 
-
 @property (nonatomic, strong) NSArray *arrayTime;
 @property (nonatomic ,strong) NSArray *washTimesArray;
 @end
@@ -92,13 +96,36 @@
     self.typeCurrentTimeButtonTag = kTommorowTag;
     [self setupButtonDataDefault:[self getcurrentArrayTime]];
     [self timeRequest];
+    
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    BOOL isEnableSaveCarFromPastOrder   = [settings boolForKey:@"isEnableSaveCarFromPastOrder"];
+    if(isEnableSaveCarFromPastOrder)
+    {
+        BOOL isHaveCar = [settings boolForKey:@"isHaveCar"];
+        if(isHaveCar)
+        {
+            self.currentCar = [settings objectForKey:@"RememberCar"];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setTitle:@"Ближайшая автомойка"];
+    [self setTitle:self.dictInfo[@"title"]];
     [self.tableView reloadData];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 
 #pragma mark - UITableViewDelegate -
@@ -364,20 +391,18 @@
 
 -(void)configurationCarInfoCell:(CarInfoCell*)cell
 {
-    
     NSString *model = self.currentCar[@"model"];
     NSString *brand = self.currentCar[@"brand"];
     NSString *number = self.currentCar[@"number"];
-    if(model.length && brand.length && number.length)
+    if(model.length && brand.length)
     {
-        cell.modelLabel.text  = [NSString stringWithFormat:@"%@, %@",brand,model];
+        cell.modelLabel.text  = [NSString stringWithFormat:@"%@ %@",brand,model];
         cell.numberLabel.text = [NSString stringWithFormat:@"%@",number];
     }
     else
     {
-        cell.modelLabel.text = @"МАРКА, МОДЕЛЬ";
+        cell.modelLabel.text = @"Марка Модель";
     }
-    
 }
 
 -(void)configurationConfirmBotCell:(ConfirmBotCell*)cell
@@ -561,7 +586,7 @@
 
 -(void)onSendButton:(UIButton*)button
 {
-    __IN_DEVELOPMENT__
+    [self onCallButtonPressed:nil];
 }
 
 -(void)setupButtonDataDefault:(NSArray*)arrayForDay
@@ -569,18 +594,64 @@
     if(arrayForDay.count == 0)
         return;
     
+    
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setTimeZone:[NSTimeZone defaultTimeZone]];
+    [format setDateFormat:@"MM dd, yyyy"];
+    
+    NSDate *now = [[NSDate alloc] init];
+    
+    NSString *dateString = [format stringFromDate:now];
+    
+    NSDateFormatter *inFormat = [[NSDateFormatter alloc] init];
+    [inFormat setTimeZone:[NSTimeZone defaultTimeZone]];
+    [inFormat setDateFormat:@"MM dd, yyyy HH:mm"];
+
+    
     self.buttonArray = [@[] mutableCopy];
     for(NSDictionary *dic in arrayForDay)
     {
+        NSDate *parsed = [inFormat dateFromString:[NSString stringWithFormat:@"%@ %@",dateString,dic[@"time"]]];
         
-        [self.buttonArray addObject:@{
-                                      
-                                     @"id":dic[@"id"],
-                                     @"title":dic[@"time"],
-                                     @"selected":@(0),
-                                     @"available":@([dic[@"open"] integerValue])
-                                     
-                                      }];
+        NSDate *dateOfNov = parsed;
+        if(self.typeCurrentTimeButtonTag == kTodayTag)
+        {
+            if([dateOfNov timeIntervalSince1970]  <  [[NSDate date] timeIntervalSince1970])
+            {
+                [self.buttonArray addObject:@{
+                                              
+                                              @"id":dic[@"id"],
+                                              @"title":dic[@"time"],
+                                              @"selected":@(0),
+                                              @"available":@(0)
+                                              
+                                              }];
+            }
+            else
+            {
+                [self.buttonArray addObject:@{
+                                              
+                                              @"id":dic[@"id"],
+                                              @"title":dic[@"time"],
+                                              @"selected":@(0),
+                                              @"available":@([dic[@"open"] integerValue])
+                                              
+                                              }];
+                
+            }
+        }
+        else
+        {
+            [self.buttonArray addObject:@{
+                                          
+                                          @"id":dic[@"id"],
+                                          @"title":dic[@"time"],
+                                          @"selected":@(0),
+                                          @"available":@([dic[@"open"] integerValue])
+                                          
+                                          }];
+
+        }
     }
 }
 
@@ -614,12 +685,20 @@
 
 -(void)onChoiceServiceButton:(UIButton*)button
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChoiceService" bundle:nil];
-    ChoiceServiceViewController *choiceServiceViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChoiceServiceViewController"];
-    choiceServiceViewController.arrayServices = self.servicesArray;
-    choiceServiceViewController.currentServisesChoice = self.currentServisesChoice;
-    [self setTitle:@" "];
-    [self.navigationController pushViewController:choiceServiceViewController animated:YES];
+    if(self.currentCar[@"car_category_id"])
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChoiceService" bundle:nil];
+        ChoiceServiceViewController *choiceServiceViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChoiceServiceViewController"];
+        choiceServiceViewController.arrayServices = self.servicesArray;
+        choiceServiceViewController.currentServisesChoice = self.currentServisesChoice;
+        choiceServiceViewController.typeOfCar = [self.currentCar[@"car_category_id"] integerValue];
+        [self setTitle:@" "];
+        [self.navigationController pushViewController:choiceServiceViewController animated:YES];
+    }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Нужно указать машину" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    }
 }
 
 -(void)request
@@ -637,6 +716,19 @@
         
             self.servicesArray  = [json[@"data"][@"wash_services"] mutableCopy];
             self.phoneNumber    = [NSString stringWithFormat:@"%@",json[@"data"][@"phone"]];
+            
+            if(self.phoneNumber.length == 0)
+                self.phoneNumber    = [NSString stringWithFormat:@"%@",json[@"data"][@"notifications_phone"]];
+        }
+        else
+        {
+            if(json[@"data"] != nil)
+            {
+                self.phoneNumber    = [NSString stringWithFormat:@"%@",json[@"data"][@"phone"]];
+                
+                if(self.phoneNumber.length == 0)
+                    self.phoneNumber    = [NSString stringWithFormat:@"%@",json[@"data"][@"notifications_phone"]];
+            }
         }
         self.latWash            = [[NSString stringWithFormat:@"%@",json[@"data"][@"latitude"]] doubleValue];
         self.lonWash            = [[NSString stringWithFormat:@"%@",json[@"data"][@"longitude"]] doubleValue];
@@ -770,8 +862,12 @@
     NSString *car_id = self.currentCar[@"carBrandID"];
     NSString *model_id = self.currentCar[@"carModelID"];
     NSString *car_number = self.currentCar[@"number"];
+    if(car_number == nil)
+    {
+        car_number = @"";
+    }
     
-    if(car_number.length == 0 || model_id.length == 0 || car_number.length == 0)
+    if(car_id.length == 0 || model_id.length == 0)
     {
         [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Не указана машина!" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil] show];
         return;

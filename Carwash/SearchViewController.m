@@ -9,6 +9,11 @@
 #import "OunCarsViewController.h"
 #import "SelectServiceOnSearch.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 //Data
 #import "StatusServicesSearch.h"
 #import "SearchViewController.h"
@@ -90,6 +95,18 @@
     [super viewWillAppear:animated];
     self.title = @"ПОИСК";
     [self.tableView reloadData];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 -(void)setupData
 {
@@ -368,11 +385,11 @@
     NSString *check = [NSString stringWithFormat:@"%@",self.currentCar[@"number"]];
     if( check.length > 0 && ![check isEqualToString:@"(null)"])
     {
-        priceCell.carInfoLabel.text = [NSString stringWithFormat:@"%@, %@",self.currentCar[@"brand"],self.currentCar[@"model"]];
+        priceCell.carInfoLabel.text = [NSString stringWithFormat:@"%@ %@",self.currentCar[@"brand"],self.currentCar[@"model"]];
     }
     else
     {
-        priceCell.carInfoLabel.text = [NSString stringWithFormat:@"Марка, модель"];
+        priceCell.carInfoLabel.text = [NSString stringWithFormat:@"Марка Модель"];
     }
     
     NSString *service = [NSString stringWithFormat:@"%@",self.serviceDict[@"serviceID"]];
@@ -558,7 +575,12 @@
     
     times = [self.timeArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wash_time LIKE %@",maxT]];
     NSString *idTimeTo   = times.lastObject[@"id"];
-
+    
+    if(!idTimeTo)
+        idTimeTo = @"0";
+    if(!idTimeFrom)
+        idTimeFrom = @"7";
+    
     [self.infoDict setObject:idTimeFrom forKey:@"idTimeFrom"];
     [self.infoDict setObject:idTimeTo   forKey:@"idTimeTo"];
 

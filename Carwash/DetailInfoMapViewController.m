@@ -11,6 +11,10 @@
 #import "CustomAnnotation.h"
 #import "CustomAnnotationView.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 
 @interface DetailInfoMapViewController ()<CustomAnnotationViewDelegate>
 
@@ -26,7 +30,8 @@
 {
     [super viewDidLoad];
     [self render];
-    [self.infoLabel setText:@"Информация на карте"];
+    
+    [self.infoLabel setText:self.dictionaryInfo[@"info"] ? self.dictionaryInfo[@"address"] : self.dictionaryInfo[@"address"]];
     [self addAnnotations];
 }
 
@@ -34,6 +39,19 @@
 {
     [super viewWillAppear:animated];
     [self setTitle:@"Ближайшая автомойка"];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+
+    
 }
 
 -(void)render

@@ -11,6 +11,10 @@
 #import "RegisterViewController.h"
 #import "RegisterPassViewController.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 @interface LoginViewController ()
 @property (nonatomic, weak) IBOutlet UITextField *numberTF;
 
@@ -32,21 +36,41 @@
     }
     return self;
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setDefaultViewCenter:self.view.center];
 }
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+}
+
+
 -(IBAction)onLoginButton:(id)sender
 {
    __block NSString *number = self.numberTF.text;
-    
+    number = [number stringByReplacingOccurrencesOfString:@"+" withString:@""];
     if(number.length == 0)
     {
         return;
     }
     
-    [[GetLoginRequest alloc] getLoginClientByPhone:number completionHandler:^(NSDictionary* json)
+    [[GetLoginRequest alloc] getLoginClientByPhone:self.numberTF.text completionHandler:^(NSDictionary* json)
     {
         NSString *codeAccessToken  = json[@"data"][@"access_token"];
         if(![codeAccessToken isKindOfClass:[NSNull class]])
@@ -76,6 +100,11 @@
             if(codeAccessToken.length > 0)
             {
                 [self.navigationController pushViewController:rgViewController animated:YES];
+                [self showDetail];
+            }
+            else
+            {
+              [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"На сервере" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
             }
         }
         else
@@ -85,6 +114,7 @@
             rgViewController.codeF = json[@"data"][@"sms_code"];
             rgViewController.phoneF = number;
             [self.navigationController pushViewController:rgViewController animated:YES];
+            [self showDetail];
         }
     } errorHandler:^(NSDictionary *json)
     {
@@ -94,6 +124,12 @@
             [[[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"На сервере" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
         }
     }];
+}
+
+
+-(void)showDetail
+{
+    [[[UIAlertView alloc] initWithTitle:@"Внимание" message:@"На ваш номер телефона в течении пяти минут будет отправлено смс с паролем." delegate:nil cancelButtonTitle:@"Хорошо" otherButtonTitles: nil] show];
 }
 
 #pragma mark - Keyboard Notyfications Actions -

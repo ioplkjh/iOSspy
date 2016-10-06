@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -13,7 +13,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="CjW-hQ-nfl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -31,10 +30,10 @@
             </objects>
             <point key="canvasLocation" x="-430" y="265"/>
         </scene>
-        <!--Ближайшая автомойка-->
+        <!--Главная страница с картой-->
         <scene sceneID="vrU-Tn-R1O">
             <objects>
-                <viewController storyboardIdentifier="RootPageViewController" id="dkt-o9-ewe" customClass="RootPageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootPageViewController" title="Главная страница с картой" id="dkt-o9-ewe" customClass="RootPageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uyf-Cx-A7b"/>
                         <viewControllerLayoutGuide type="bottom" id="bPZ-Pn-6CG"/>
@@ -45,11 +44,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yCY-C6-wng">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                                <animations/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edw-bH-meZ">
                                 <rect key="frame" x="550" y="265" width="30" height="30"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2q1-aN-st7"/>
                                     <constraint firstAttribute="width" constant="30" id="TOp-aJ-Obp"/>
@@ -61,7 +58,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zM-5V-WK9">
                                 <rect key="frame" x="550" y="219" width="30" height="30"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Meb-4W-qgE"/>
                                     <constraint firstAttribute="height" constant="30" id="dfU-br-jRc"/>
@@ -73,7 +69,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZo-Jm-jWC">
                                 <rect key="frame" x="516" y="453" width="75" height="75"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="23W-b4-o9Y"/>
                                     <constraint firstAttribute="width" constant="75" id="SYV-q0-uYu"/>
@@ -84,7 +79,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="edw-bH-meZ" secondAttribute="trailing" constant="20" id="7We-K6-INH"/>
@@ -100,7 +94,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Ближайшая автомойка" id="iH2-Qh-9gV">
+                    <navigationItem key="navigationItem" title="Запись24" id="iH2-Qh-9gV">
                         <barButtonItem key="backBarButtonItem" title=" " id="vh1-cb-j2v"/>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>

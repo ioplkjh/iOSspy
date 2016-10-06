@@ -12,6 +12,12 @@
 #import "GetAllRegionRequest.h"
 #import "ChoiceRegionViewController.h"
 #import "GetLoginRequest.h"
+
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 #define kOffsetRegistrationDifferens        is_4_inch() ? 60.f : 50.f
 
 CG_INLINE BOOL is_4_inch()
@@ -37,6 +43,7 @@ CG_INLINE BOOL is_4_inch()
 @property (nonatomic, strong) NSNumber *regionID;
 @property (weak, nonatomic) IBOutlet UIButton *regionButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *getCodeButton;
 @property (nonatomic, strong) NSMutableDictionary *regionDict;
 @end
 
@@ -70,11 +77,34 @@ CG_INLINE BOOL is_4_inch()
     
 #warning убрать
     self.smsTF.text = self.codeF;
+    
+    self.getCodeButton.enabled = NO;
+    [self performSelector:@selector(unlockButton) withObject:nil afterDelay:40];
+}
+
+-(void)unlockButton
+{
+    self.getCodeButton.enabled = YES;
+}
+- (IBAction)onBackTo:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+
     if(self.regionDict[@"id"])
     {
         NSString *region = [NSString stringWithFormat:@"%@",self.regionDict[@"region"]];
@@ -83,6 +113,7 @@ CG_INLINE BOOL is_4_inch()
 
         self.regionID = @([self.regionDict[@"id"] integerValue]);
     }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,6 +163,7 @@ CG_INLINE BOOL is_4_inch()
     
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
+
 - (IBAction)onAcceptButton:(id)sender
 {
     if(self.textField.text.length > 14 || self.textField.text.length <= 0)
@@ -175,8 +207,6 @@ CG_INLINE BOOL is_4_inch()
          [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"userID"];
          [[NSUserDefaults standardUserDefaults] setObject:region forKey:@"userLocation"];
 
-         
-         
          [[NSUserDefaults standardUserDefaults] setObject:codePassword forKey:@"CodePassword"];
          [[NSUserDefaults standardUserDefaults] setObject:codeAccessToken forKey:@"AccessToken"];
          

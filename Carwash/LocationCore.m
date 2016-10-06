@@ -49,7 +49,7 @@ static LocationCore *sharedInstance;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     if(IS_OS_8_OR_LATER) {
-        [self.locationManager requestAlwaysAuthorization];
+        [self.locationManager requestWhenInUseAuthorization];
     }
     
     [self.locationManager startUpdatingLocation];
@@ -77,11 +77,9 @@ static LocationCore *sharedInstance;
 
 - (CGFloat)calculateDistanceLat:(CLLocationDegrees)lat lon:(CLLocationDegrees)lon
 {
-    
     CLLocation *location      = [[CLLocation alloc] initWithLatitude:self.currentCoordinates.coordinate.latitude longitude:self.currentCoordinates.coordinate.longitude];
     CLLocation *fromLocation  = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
     CLLocationDistance meters = [location distanceFromLocation:fromLocation];
-    
     
 //    CLLocation *locationGet = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
 //    CGFloat distance = [self.currentCoordinates distanceFromLocation:locationGet];

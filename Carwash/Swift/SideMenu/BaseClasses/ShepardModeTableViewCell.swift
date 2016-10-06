@@ -23,15 +23,15 @@ public class ShepardModeTableViewCell: UITableViewCell {
     
     class var identifier: String { return String.className(self) }
     
-    required public init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.setup()
-    }
-    
-//    public required init?(coder aDecoder: NSCoder) {
+//    required public init(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
 //        self.setup()
 //    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setup()
+    }
 
     public func setup() {
     }

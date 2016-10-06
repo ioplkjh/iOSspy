@@ -9,6 +9,11 @@
 #import "ChoiceServiceViewController.h"
 #import "ChoiceServiceCell.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 #define kChoiceServiceCell 0
 #define kChoiceServiceCellID @"choiceServiceCellID"
 
@@ -19,14 +24,22 @@
 @property (nonatomic ,strong) NSMutableArray *infoArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *chiceButton;
 
 @end
 
 @implementation ChoiceServiceViewController
+- (IBAction)onChoiceButton:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.arrayServices = [[self.arrayServices filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"car_category_id LIKE %@",[NSString stringWithFormat:@"%ld",(long)self.typeOfCar]]] mutableCopy];
+    
     self.infoArray = [@[] mutableCopy];
     self.title = @"Выбор услуг";
     [self setupInfo];
@@ -35,6 +48,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -144,8 +169,8 @@
         }
     }
     
-    NSString *price = [NSString stringWithFormat:@"%.2f p.",priceStart];
-    self.priceLabel.text = price;
+    NSString *price = [NSString stringWithFormat:@"Выбрать: %.2f p.",priceStart];
+    [self.chiceButton setTitle:price forState:UIControlStateNormal];
 }
 
 - (void)configurationChoiceServiceCell:(ChoiceServiceCell*)cell index:(NSInteger)index

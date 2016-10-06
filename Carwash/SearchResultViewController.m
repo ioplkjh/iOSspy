@@ -16,6 +16,11 @@
 #import "LocationCore.h"
 #import "GetallTimesRequest.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 #define kSearchResultCellID @"searchResultCellID"
 
 @interface SearchResultViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -40,6 +45,18 @@
     [super viewWillAppear:animated];
     [self setTitle:@"Результаты поиска"];
     [self.tableView reloadData];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 
 #pragma mark - UITableViewDelegate -
@@ -137,7 +154,17 @@
                                     wash_service_id:dict[@"serviceID"]
                                   completionHandler:^(NSDictionary *json)
     {
-        self.arrayInfo = json[@"data"];
+        NSArray *filtered = [json[@"data"] copy];
+        NSMutableArray *finishedArray = [@[] mutableCopy];
+        for(NSDictionary *dict in filtered)
+        {
+            double dist = [[LocationCore sharedMenager] calculateDistanceLat:[dict[@"latitude"] doubleValue] lon:[dict[@"longitude"] doubleValue]];
+            if(dist < 21.0)
+            {
+                [finishedArray addObject:dict];
+            }
+        }
+        self.arrayInfo = [finishedArray copy];
         [self.tableView reloadData];
      } errorHandler:^{
         

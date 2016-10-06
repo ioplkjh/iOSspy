@@ -8,6 +8,10 @@
 
 #import "ChoiceRegionViewController.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 #define kRegionCellID @"regionCellID"
 
 @interface ChoiceRegionViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -28,8 +32,22 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:YES];
+    if(!self.notShow)
+    {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
     [super viewWillDisappear:animated];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
 }
 
 #pragma mark - UITableViewDelegate -
@@ -58,8 +76,10 @@
     NSDictionary *infoDict = self.regions[index];
     self.regionDict[@"region"] = infoDict[@"region"];
     self.regionDict[@"id"]     = infoDict[@"id"];
-
-    [self.navigationController setNavigationBarHidden:YES];
+    if(!self.notShow)
+    {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

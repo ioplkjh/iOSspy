@@ -11,4 +11,5 @@
 @interface ChoiceServiceViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *arrayServices;
 @property (nonatomic, strong) NSMutableArray *currentServisesChoice;
+@property (nonatomic, assign) NSInteger typeOfCar;
 @end

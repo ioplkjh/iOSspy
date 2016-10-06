@@ -57,7 +57,7 @@
     NSDate *now = [[NSDate alloc] init];
     
     NSString *dateString = [format stringFromDate:now];
-    
+
     NSDictionary *parameters = @{
                                  @"additional_services":additional_services,
                                  @"local_time":dateString,

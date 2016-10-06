@@ -11,6 +11,10 @@
 #import "GetNearestRequest.h"
 #import "WashPageViewController.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
 //MKMap Classes
 #import "CustomAnnotation.h"
 #import "CustomAnnotationView.h"
@@ -48,16 +52,30 @@
     self.lon = 0.01;
 
     self.mapView.delegate = self;
+
     self.arrayData = [@[] copy];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateLocation:) name:kLocationManagerUpdateLocationNotification object:nil];
     [self setupMapView];
+    [self request];
 
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateLocation:) name:kLocationManagerUpdateLocationNotification object:nil];
 }
 
@@ -72,8 +90,9 @@
 {
     CLLocation *location = [[LocationCore sharedMenager] getCurrentLocation];
     CLLocationCoordinate2D coordinate = location.coordinate;
-    //test
-    //    coordinate = CLLocationCoordinate2DMake(47.837608, 35.139217);
+    
+    if(coordinate.latitude == 0 || coordinate.longitude == 0)
+        coordinate = CLLocationCoordinate2DMake(52.721234, 41.451799);
     
     MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
     [self.mapView setRegion:MKCoordinateRegionMake(coordinate, span) animated:YES];
@@ -85,9 +104,14 @@
 {
     CLLocation *location = [[LocationCore sharedMenager] getCurrentLocation];
     CLLocationCoordinate2D coordinate = location.coordinate;
-//test
-//    coordinate = CLLocationCoordinate2DMake(47.837608, 35.139217);
-    
+
+    if(coordinate.latitude == 0 || coordinate.longitude == 0)
+    {
+        coordinate = CLLocationCoordinate2DMake(52.721234, 41.451799);
+        [self performSelector:@selector(request) withObject:nil afterDelay:5.0];
+
+    }
+
     if(self.firstRun == NO)
     {
         MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
@@ -110,13 +134,16 @@
     CLLocationCoordinate2D coordinate = location.coordinate;
     if(coordinate.latitude == 0 || coordinate.latitude == 0)
     {
-        [SVProgressHUD showInfoWithStatus:@"Местоположение не определено"];
-        return;
+        coordinate = CLLocationCoordinate2DMake(52.721234, 41.451799);
     }
-    [[GetNearestRequest alloc] getNearestByDistance:@20 lat:@(coordinate.latitude) lon:@(coordinate.longitude) completionHandler:^(NSDictionary *json)
+
+    
+    [[GetNearestRequest alloc] getNearestByDistance:@500 lat:@(coordinate.latitude) lon:@(coordinate.longitude) completionHandler:^(NSDictionary *json)
     {
-        self.arrayData = json[@"data"];
-        [self addAnnotations];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.arrayData = json[@"data"];
+            [self addAnnotations];
+        });
     }
     errorHandler:
     ^{

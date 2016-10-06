@@ -10,6 +10,11 @@
 #import "CarOunTableViewCell.h"
 #import "AddCarStepOneViewController.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 #define kCarOunTableViewCellID @"carOunTableViewCellID"
 
 #define minCellHeight 35
@@ -56,6 +61,18 @@
     [super viewWillAppear:animated];
     [self loadCars];
     [self setTitle:@"МАРКА-МОДЕЛЬ-НОМЕР"];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 
 -(void)render
@@ -99,6 +116,13 @@
     self.currentCar[@"carModelID"]     = dict[@"carModelID"];
     self.currentCar[@"car_category_id"]  = dict[@"car_category_id"];
     
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    if([settings boolForKey:@"isEnableSaveCarFromPastOrder"])
+    {
+        [settings setBool:YES forKey:@"isHaveCar"];
+        [settings setObject:self.currentCar forKey:@"RememberCar"];
+        [settings synchronize];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

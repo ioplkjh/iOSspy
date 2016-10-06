@@ -33,5 +33,6 @@ typedef NS_ENUM(NSInteger, TypeTimeButton)
 @property (weak, nonatomic) IBOutlet UIButton *dayAfterTommorowButton;
 
 -(void)setupCarButtonFromArayContent:(NSArray*)arrayCars;
+-(void)setupCarTodayButtonFromArayContent:(NSArray*)arrayCars;
 
 @end

@@ -14,6 +14,11 @@
 
 #import "GetAllCommentsRequest.h"
 
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 #define kCloseTableViewCellID @"closeTableViewCellID"
 #define kOpenTableViewCellID  @"openTableViewCellID"
 
@@ -35,6 +40,18 @@
 {
     [super viewWillAppear:animated];
     [self request];
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
 }
 
 #pragma mark - UITableViewDelegate -
@@ -109,7 +126,7 @@
     cell.commentLabel.numberOfLines = NSIntegerMax;
     cell.answerLabel.text =  dict[@"answer"];
     cell.answerLabel.numberOfLines = NSIntegerMax;
-    cell.ratingView.value =  [dict[@"answer"] doubleValue];
+    cell.ratingView.value =  [dict[@"rating"] doubleValue];
     cell.nameAndCarLabel.text = [NSString stringWithFormat:@"%@, %@ %@",dict[@"phone"],dict[@"carBrand"],dict[@"carModel"]];
 }
 
@@ -118,7 +135,7 @@
     NSDictionary *dict = self.commentsArray[index];
     cell.commentLabel.text = dict[@"text"];
     cell.answerLabel.text =  dict[@"answer"];
-    cell.ratingView.value =  [dict[@"answer"] doubleValue];
+    cell.ratingView.value =  [dict[@"rating"] doubleValue];
     cell.nameAndCarLabel.text = [NSString stringWithFormat:@"%@, %@ %@",dict[@"phone"],dict[@"carBrand"],dict[@"carModel"]];}
 
 -(void)setCellOpen:(NSInteger)index
@@ -166,8 +183,9 @@
         NSDictionary *dictNew = @{
                                   @"text":dict[@"text"],
                                   @"answer":dict[@"answer"],
-                                  @"phone":dict[@"client_phone"],
+                                  @"phone":dict[@"client_fio"],
                                   @"isOpen":@0,
+                                  @"rating":dict[@"mark"],
                                   @"carBrand":dict[@"client_car"][@"brand"],
                                   @"carModel":dict[@"client_car"][@"model"],
                                   @"carNumber":dict[@"client_car"][@"gos_number"]

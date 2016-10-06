@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8500815F1C3AC25C00219AD0 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8500815E1C3AC25C00219AD0 /* libGoogleAnalyticsServices.a */; };
+		850081611C3AC30800219AD0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850081601C3AC30800219AD0 /* QuartzCore.framework */; };
+		850081631C3AC31300219AD0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850081621C3AC31300219AD0 /* Accelerate.framework */; };
+		850081651C3AC32700219AD0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850081641C3AC32700219AD0 /* Foundation.framework */; };
+		850081671C3AC33100219AD0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850081661C3AC33100219AD0 /* CoreGraphics.framework */; };
+		850081691C3AC33900219AD0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850081681C3AC33900219AD0 /* CoreTelephony.framework */; };
+		8500816B1C3AC34700219AD0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8500816A1C3AC34700219AD0 /* SystemConfiguration.framework */; };
 		CA0295DC1B94F82100950687 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0295DB1B94F82100950687 /* main.m */; };
 		CA0295DF1B94F82100950687 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0295DE1B94F82100950687 /* AppDelegate.m */; };
 		CA0295E21B94F82100950687 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0295E11B94F82100950687 /* ViewController.m */; };
@@ -54,6 +61,7 @@
 		CA19C7EC1BBB237C009C0962 /* OfflineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA19C7EB1BBB237C009C0962 /* OfflineCell.m */; };
 		CA19C7EF1BBC0AC0009C0962 /* GetSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CA19C7EE1BBC0AC0009C0962 /* GetSearchRequest.m */; };
 		CA1ED2CF1BA5E15400FC60CF /* GetAllCommentsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1ED2CE1BA5E15400FC60CF /* GetAllCommentsRequest.m */; };
+		CA30DC121BD94FEE002635F3 /* GetUpdateUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CA30DC111BD94FEE002635F3 /* GetUpdateUserInfo.m */; };
 		CA472C361B9E037700A43EE3 /* slider-default-handle-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = CA472C181B9E037700A43EE3 /* slider-default-handle-highlighted.png */; };
 		CA472C371B9E037700A43EE3 /* slider-default-handle-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA472C191B9E037700A43EE3 /* slider-default-handle-highlighted@2x.png */; };
 		CA472C381B9E037700A43EE3 /* slider-default-handle.png in Resources */ = {isa = PBXBuildFile; fileRef = CA472C1A1B9E037700A43EE3 /* slider-default-handle.png */; };
@@ -87,6 +95,7 @@
 		CA472C5E1B9E3E8800A43EE3 /* WashPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA472C5D1B9E3E8800A43EE3 /* WashPageViewController.m */; };
 		CA472C621B9E3EB600A43EE3 /* WashPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA472C601B9E3EB600A43EE3 /* WashPage.storyboard */; };
 		CA472C651B9E478200A43EE3 /* WashSelectTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA472C641B9E478200A43EE3 /* WashSelectTimeCell.m */; };
+		CA56D50E1BDA4AEE00ACB0A3 /* GetClientByToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56D50D1BDA4AEE00ACB0A3 /* GetClientByToken.m */; };
 		CA58052E1BA3732700C16D6D /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58052D1BA3732700C16D6D /* SearchResultViewController.m */; };
 		CA5805321BA3749400C16D6D /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5805311BA3749400C16D6D /* SearchResultCell.m */; };
 		CA5805351BA5908300C16D6D /* BotSectionButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5805341BA5908300C16D6D /* BotSectionButtonCell.m */; };
@@ -156,6 +165,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		850081551C3AC25C00219AD0 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		850081561C3AC25C00219AD0 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		850081571C3AC25C00219AD0 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		850081581C3AC25C00219AD0 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		850081591C3AC25C00219AD0 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		8500815A1C3AC25C00219AD0 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		8500815B1C3AC25C00219AD0 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		8500815C1C3AC25C00219AD0 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		8500815D1C3AC25C00219AD0 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		8500815E1C3AC25C00219AD0 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		850081601C3AC30800219AD0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		850081621C3AC31300219AD0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		850081641C3AC32700219AD0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		850081661C3AC33100219AD0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		850081681C3AC33900219AD0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		8500816A1C3AC34700219AD0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CA0295D61B94F82100950687 /* Carwash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carwash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0295DA1B94F82100950687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA0295DB1B94F82100950687 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -240,6 +265,8 @@
 		CA19C7EE1BBC0AC0009C0962 /* GetSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetSearchRequest.m; path = NetworkCore/GetSearchRequest.m; sourceTree = "<group>"; };
 		CA1ED2CD1BA5E15400FC60CF /* GetAllCommentsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetAllCommentsRequest.h; path = NetworkCore/GetAllCommentsRequest.h; sourceTree = "<group>"; };
 		CA1ED2CE1BA5E15400FC60CF /* GetAllCommentsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetAllCommentsRequest.m; path = NetworkCore/GetAllCommentsRequest.m; sourceTree = "<group>"; };
+		CA30DC101BD94FEE002635F3 /* GetUpdateUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetUpdateUserInfo.h; path = NetworkCore/GetUpdateUserInfo.h; sourceTree = "<group>"; };
+		CA30DC111BD94FEE002635F3 /* GetUpdateUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetUpdateUserInfo.m; path = NetworkCore/GetUpdateUserInfo.m; sourceTree = "<group>"; };
 		CA472C181B9E037700A43EE3 /* slider-default-handle-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-default-handle-highlighted.png"; sourceTree = "<group>"; };
 		CA472C191B9E037700A43EE3 /* slider-default-handle-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-default-handle-highlighted@2x.png"; sourceTree = "<group>"; };
 		CA472C1A1B9E037700A43EE3 /* slider-default-handle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-default-handle.png"; sourceTree = "<group>"; };
@@ -279,6 +306,8 @@
 		CA472C611B9E3EB600A43EE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WashPage.storyboard; sourceTree = "<group>"; };
 		CA472C631B9E478200A43EE3 /* WashSelectTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashSelectTimeCell.h; sourceTree = "<group>"; };
 		CA472C641B9E478200A43EE3 /* WashSelectTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashSelectTimeCell.m; sourceTree = "<group>"; };
+		CA56D50C1BDA4AEE00ACB0A3 /* GetClientByToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetClientByToken.h; path = NetworkCore/GetClientByToken.h; sourceTree = "<group>"; };
+		CA56D50D1BDA4AEE00ACB0A3 /* GetClientByToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetClientByToken.m; path = NetworkCore/GetClientByToken.m; sourceTree = "<group>"; };
 		CA58052C1BA3732700C16D6D /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
 		CA58052D1BA3732700C16D6D /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		CA5805301BA3749400C16D6D /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
@@ -386,9 +415,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8500816B1C3AC34700219AD0 /* SystemConfiguration.framework in Frameworks */,
+				850081691C3AC33900219AD0 /* CoreTelephony.framework in Frameworks */,
+				850081671C3AC33100219AD0 /* CoreGraphics.framework in Frameworks */,
+				850081651C3AC32700219AD0 /* Foundation.framework in Frameworks */,
+				850081631C3AC31300219AD0 /* Accelerate.framework in Frameworks */,
+				850081611C3AC30800219AD0 /* QuartzCore.framework in Frameworks */,
 				CA0296481B963FDA00950687 /* MapKit.framework in Frameworks */,
 				CAD7B0AC1BA0B6A2003039C7 /* Crashlytics.framework in Frameworks */,
 				CAD7B0AB1BA0B6A2003039C7 /* Fabric.framework in Frameworks */,
+				8500815F1C3AC25C00219AD0 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,9 +438,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		850081541C3AC25C00219AD0 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				850081551C3AC25C00219AD0 /* GAI.h */,
+				850081561C3AC25C00219AD0 /* GAIDictionaryBuilder.h */,
+				850081571C3AC25C00219AD0 /* GAIEcommerceProduct.h */,
+				850081581C3AC25C00219AD0 /* GAIEcommerceProductAction.h */,
+				850081591C3AC25C00219AD0 /* GAIEcommercePromotion.h */,
+				8500815A1C3AC25C00219AD0 /* GAIFields.h */,
+				8500815B1C3AC25C00219AD0 /* GAILogger.h */,
+				8500815C1C3AC25C00219AD0 /* GAITrackedViewController.h */,
+				8500815D1C3AC25C00219AD0 /* GAITracker.h */,
+				8500815E1C3AC25C00219AD0 /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
 		CA0295CD1B94F82100950687 = {
 			isa = PBXGroup;
 			children = (
+				8500816A1C3AC34700219AD0 /* SystemConfiguration.framework */,
+				850081681C3AC33900219AD0 /* CoreTelephony.framework */,
+				850081661C3AC33100219AD0 /* CoreGraphics.framework */,
+				850081641C3AC32700219AD0 /* Foundation.framework */,
+				850081621C3AC31300219AD0 /* Accelerate.framework */,
+				850081601C3AC30800219AD0 /* QuartzCore.framework */,
 				CA0296471B963FDA00950687 /* MapKit.framework */,
 				CA0295D81B94F82100950687 /* Carwash */,
 				CA0295F21B94F82100950687 /* CarwashTests */,
@@ -569,6 +628,10 @@
 				CABFF40A1BBF1E2300B36A9E /* GetCancelOrderRequest.m */,
 				CABFF40C1BBF1F4B00B36A9E /* GetLeaveCommentRequest.h */,
 				CABFF40D1BBF1F4B00B36A9E /* GetLeaveCommentRequest.m */,
+				CA30DC101BD94FEE002635F3 /* GetUpdateUserInfo.h */,
+				CA30DC111BD94FEE002635F3 /* GetUpdateUserInfo.m */,
+				CA56D50C1BDA4AEE00ACB0A3 /* GetClientByToken.h */,
+				CA56D50D1BDA4AEE00ACB0A3 /* GetClientByToken.m */,
 			);
 			name = NetworkCore;
 			sourceTree = "<group>";
@@ -576,6 +639,7 @@
 		CA0296161B96242900950687 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				850081541C3AC25C00219AD0 /* GoogleAnalytics */,
 				CA472C161B9E037700A43EE3 /* NMRangeSlider */,
 				CA0D2DFB1B9A413300B0FBA8 /* HCSStarRatingView */,
 				CA0296171B96243200950687 /* SVProgressHUD */,
@@ -1036,6 +1100,11 @@
 					CA0295D51B94F82100950687 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = GU9HEWK6G4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					CA0295EE1B94F82100950687 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1181,6 +1250,7 @@
 				CA472C501B9E037700A43EE3 /* NMRangeSlider.m in Sources */,
 				CA9693AC1BBDAEC600135BC3 /* SelectServiceOnSearch.m in Sources */,
 				CADEC8B51BA215FC007EBE5D /* AddCarStepOneViewController.m in Sources */,
+				CA30DC121BD94FEE002635F3 /* GetUpdateUserInfo.m in Sources */,
 				CA19C7EC1BBB237C009C0962 /* OfflineCell.m in Sources */,
 				CA6A40E71BB9BE9000FAC288 /* LocalNotificationManager.m in Sources */,
 				CA0296581B96478500950687 /* UITableViewExtension.swift in Sources */,
@@ -1193,6 +1263,7 @@
 				CA0296571B96478500950687 /* StringExtension.swift in Sources */,
 				CA8C00571BB208FE00C38801 /* GetLoginRequest.m in Sources */,
 				CADC1A6F1B97722F006DBDEE /* RootNavigationController.m in Sources */,
+				CA56D50E1BDA4AEE00ACB0A3 /* GetClientByToken.m in Sources */,
 				CA0AF7871B9F7E320088A17B /* CarInfoCell.m in Sources */,
 				CA472C5A1B9E16CD00A43EE3 /* GetNearestRequest.m in Sources */,
 				CA9F16E41BB840C500EEE522 /* GetServicesRequest.m in Sources */,
@@ -1385,7 +1456,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "1c981533-539e-439a-ba71-9108b65b25e4";
+				PROVISIONING_PROFILE = "bf187869-e88a-4cb4-afaf-8b708a8774f4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1423,7 +1494,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b0098477-066b-4680-92de-87af6843972d";
+				PROVISIONING_PROFILE = "aaf1da25-b40d-417d-b43e-690a6c0dda7e";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1434,8 +1505,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alexey Komsomolenko (55VJNEZBX3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexey Komsomolenko (55VJNEZBX3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1447,9 +1518,13 @@
 				INFOPLIST_FILE = Carwash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carwash/External/GoogleAnalytics",
+				);
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1c981533-539e-439a-ba71-9108b65b25e4";
+				PROVISIONING_PROFILE = "";
 				SHARED_PRECOMPS_DIR = Carwash/PrefixHeader.pch;
 				SWIFT_OBJC_BRIDGING_HEADER = "Carwash/Swift/SideMenu/Carwash-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -1462,8 +1537,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexey Komsomolenko (GU9HEWK6G4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexey Komsomolenko (GU9HEWK6G4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1475,9 +1550,13 @@
 				INFOPLIST_FILE = Carwash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carwash/External/GoogleAnalytics",
+				);
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b0098477-066b-4680-92de-87af6843972d";
+				PROVISIONING_PROFILE = "";
 				SHARED_PRECOMPS_DIR = Carwash/PrefixHeader.pch;
 				SWIFT_OBJC_BRIDGING_HEADER = "Carwash/Swift/SideMenu/Carwash-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Choice Service View Controller-->
+        <!--Выбор услуги-->
         <scene sceneID="hpX-2t-knv">
             <objects>
-                <viewController storyboardIdentifier="ChoiceServiceViewController" id="Ueq-4D-7rT" customClass="ChoiceServiceViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChoiceServiceViewController" title="Выбор услуги" id="Ueq-4D-7rT" customClass="ChoiceServiceViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M1k-Ih-hgF"/>
                         <viewControllerLayoutGuide type="bottom" id="4CC-eu-rSz"/>
@@ -78,22 +78,25 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTE-Ex-fSC">
                                 <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 p." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXv-Xu-e7k">
-                                        <rect key="frame" x="0.0" y="19" width="600" height="21"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ls3-ry-oaa">
+                                        <rect key="frame" x="8" y="0.0" width="584" height="52"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="69W-hI-m3G"/>
+                                            <constraint firstAttribute="height" constant="52" id="0KB-Hv-X7n"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <state key="normal" title="Выбрать: " backgroundImage="button_dark">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onChoiceButton:" destination="Ueq-4D-7rT" eventType="touchUpInside" id="NEy-f4-5z6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="6ls-Ua-KiC"/>
-                                    <constraint firstAttribute="centerY" secondItem="QXv-Xu-e7k" secondAttribute="centerY" id="BkJ-av-rxP"/>
-                                    <constraint firstAttribute="trailing" secondItem="QXv-Xu-e7k" secondAttribute="trailing" id="JDp-eB-YuM"/>
-                                    <constraint firstItem="QXv-Xu-e7k" firstAttribute="leading" secondItem="CTE-Ex-fSC" secondAttribute="leading" id="yQb-F7-WOw"/>
+                                    <constraint firstAttribute="bottom" secondItem="ls3-ry-oaa" secondAttribute="bottom" constant="8" id="YSU-i8-H9N"/>
+                                    <constraint firstItem="ls3-ry-oaa" firstAttribute="leading" secondItem="CTE-Ex-fSC" secondAttribute="leading" constant="8" id="fqf-Ns-TMk"/>
+                                    <constraint firstAttribute="trailing" secondItem="ls3-ry-oaa" secondAttribute="trailing" constant="8" id="lUb-gh-PvS"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -110,7 +113,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
-                        <outlet property="priceLabel" destination="QXv-Xu-e7k" id="nhs-N3-oEx"/>
+                        <outlet property="chiceButton" destination="ls3-ry-oaa" id="mfr-P1-0bS"/>
                         <outlet property="tableView" destination="kfg-tQ-8fI" id="jbh-QT-cTi"/>
                     </connections>
                 </viewController>
@@ -118,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="137" y="413"/>
         </scene>
-        <!--Select Service On Search-->
+        <!--Выбор услуги при поиске-->
         <scene sceneID="pIX-WM-Z66">
             <objects>
-                <viewController storyboardIdentifier="SelectServiceOnSearch" id="uGi-cg-cAW" customClass="SelectServiceOnSearch" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectServiceOnSearch" title="Выбор услуги при поиске" id="uGi-cg-cAW" customClass="SelectServiceOnSearch" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tZh-H5-JeO"/>
                         <viewControllerLayoutGuide type="bottom" id="L5J-rM-RqU"/>
@@ -138,7 +141,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bac-e4-rIC" id="h3t-uF-KGR">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -168,6 +171,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="button_dark" width="328" height="56"/>
         <image name="switch_on_galochka" width="24" height="24"/>
     </resources>
 </document>

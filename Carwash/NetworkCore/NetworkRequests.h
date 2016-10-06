@@ -37,6 +37,8 @@
 
 #define kGetCancelOrder             @"ClientOrder/Cancel"
 #define kGetLeaveComment            @"CarWashReview/Add"
+#define kGetUpdateInfo              @"Client/UpdateInfo"
+#define kGetByToken                 @"Client/GetByToken"
 
 @interface NetworkRequests : NSObject
 

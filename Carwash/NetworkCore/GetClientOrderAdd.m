@@ -45,6 +45,13 @@
         });
         return;
     }
+    
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *now = [[NSDate alloc] init];
+    
+    NSString *dateString = [format stringFromDate:now];
     NSDictionary *parameters = @{
                                  @"access_token" :access_token,
                                  @"car_wash_id"  :car_wash_id,
@@ -54,9 +61,10 @@
                                  @"model_id"     :model_id,
                                  @"car_number"   :car_number,
                                  @"services"     :services,
-                                 @"order_source_id":@"2"
+                                 @"order_source_id":@"2",
+                                 @"local_time":dateString
                                  };
-    
+
     [SVProgressHUD showWithStatus:@"Загрузка"];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self preparationRequestForPOSTMethodRequest:kGetCustomAdd
@@ -76,6 +84,18 @@
              return ;
          }
 
+         if([json[@"data"][@"id"] isKindOfClass:[NSNull class]])
+         {
+             NSLog(@"%@",json[@"data"]);
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 errorHandler();
+                 [[[UIAlertView alloc] initWithTitle:@"Прошедшее время" message:@"Запись невозможна" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                 
+             });
+             return ;
+         }
+         
          BOOL valid = [json[@"data"] isKindOfClass:[NSNull class]] ? NO : [json[@"data"] count];
          
          if (!valid) {

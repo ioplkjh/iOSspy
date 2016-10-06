@@ -10,4 +10,5 @@
 
 @interface DetailOrderViewController : UIViewController
 @property(nonatomic, strong) NSDictionary *dictInfo;
+@property (nonatomic, assign) BOOL isCommented;
 @end

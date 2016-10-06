@@ -10,11 +10,20 @@
 #import "Carwash-Swift.h"
 #import "AddCarStepOneViewController.h"
 
+#import "GetUpdateUserInfo.h"
+#import "GetClientByToken.h"
+
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
+
+
 //Cells
 #import "SwithCell.h"
 #import "DataConfirmCell.h"
 #import "BotSectionButtonCell.h"
 #import "UserCarsCell.h"
+#import "ChoiceRegionViewController.h"
 
 #define kSwitchAutoRegisterCell                0
 #define kSwitchSaveCarFromPastOrderCell        1
@@ -46,6 +55,9 @@ CG_INLINE BOOL is_4_inch()
 @property (nonatomic, assign) BOOL isEnableSaveCarFromPastOrder;
 @property (nonatomic, assign) BOOL isEnableSaveListOfServices;
 
+@property (nonatomic, assign) BOOL isChange;
+@property (nonatomic, strong) NSMutableDictionary *regionDict;
+
 //From Cell
 @property (nonatomic, strong) UITextField *textFieldName;
 @property (assign, nonatomic) CGPoint defaultViewCenter;
@@ -54,6 +66,7 @@ CG_INLINE BOOL is_4_inch()
 //Values
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *userLocation;
+@property (nonatomic, strong) NSString *locationID;
 
 @property (nonatomic, strong) NSMutableArray *myCarrArray;
 
@@ -80,6 +93,41 @@ CG_INLINE BOOL is_4_inch()
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.regionDict = [@{} mutableCopy];
+    [self requestUserData];
+
+}
+
+-(void)requestUserData
+{
+    [[GetClientByToken alloc] getGetClientByTokenCompletionHandler:^(NSDictionary* json){
+        
+        AppDelegate *appDel = SharedAppDelegate;
+        NSMutableDictionary *savedStock = [[NSMutableDictionary alloc] initWithContentsOfFile:appDel.pathRegions];
+        NSArray *regions = [savedStock objectForKey:@"Regions"];
+
+        NSDictionary *dict = [regions filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"id LIKE %@",[NSString stringWithFormat:@"%@",json[@"data"][@"region_id"]]]].lastObject;
+        NSString *userLocation = @"";
+        NSString *UserName      = json[@"data"][@"fio"];
+        if(dict)
+        {
+            userLocation  = dict[@"region"];
+        }
+        NSString *locationID    = json[@"data"][@"region_id"];
+
+        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+        [[NSUserDefaults standardUserDefaults] setObject:UserName forKey:@"UserName"];
+        [[NSUserDefaults standardUserDefaults] setObject:userLocation forKey:@"userLocation"];
+        [[NSUserDefaults standardUserDefaults] setObject:locationID forKey:@"locationID"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        self.userName       = [settings stringForKey:@"UserName"].length ? [settings stringForKey:@"UserName"] : @"";
+        self.userLocation   = [settings stringForKey:@"userLocation"].length ? [settings stringForKey:@"userLocation"] : @"Выберите область";
+        self.locationID     = [settings stringForKey:@"locationID"].length ? [settings stringForKey:@"locationID"] : @"0";
+        [self.tableView reloadData];
+    } errorHandler:^{
+        
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -87,6 +135,33 @@ CG_INLINE BOOL is_4_inch()
     [super viewWillAppear:animated];
     [self setupData];
     self.title = @"НАСТРОЙКИ";
+    
+    NSString *name = [NSString stringWithFormat:@"Pattern~%@", self.title];
+    
+    // The UA-XXXXX-Y tracker ID is loaded automatically from the
+    // GoogleService-Info.plist by the `GGLContext` in the AppDelegate.
+    // If you're copying this to an app just using Analytics, you'll
+    // need to configure your tracking ID here.
+    // [START screen_view_hit_objc]
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    // [END screen_view_hit_objc]
+    
+    
+    NSString *region   = [NSString stringWithFormat:@"%@", self.regionDict[@"region"]];
+    NSString *regionID   = [NSString stringWithFormat:@"%@", self.regionDict[@"id"]];
+
+    if(![region isEqualToString:@"(null)"])
+    {
+        self.userLocation = region;
+    }
+    if(![regionID isEqualToString:@"(null)"])
+    {
+        self.locationID = regionID;
+    }
+    
+    [self.tableView reloadData];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -105,16 +180,15 @@ CG_INLINE BOOL is_4_inch()
     NSArray *myCarsArray = [savedStock objectForKey:@"MyCars"];
     self.myCarrArray = myCarsArray;
     
-    
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
 
     self.isEnableAuroRegister           = [settings boolForKey:@"isEnableAuroRegister"        ];
     self.isEnableSaveCarFromPastOrder   = [settings boolForKey:@"isEnableSaveCarFromPastOrder"];
     self.isEnableSaveListOfServices     = [settings boolForKey:@"isEnableSaveListOfServices"  ];
     
-    self.userName       = [settings stringForKey:@"UserName"].length ? [settings stringForKey:@"UserName"] : @"";
-    self.userLocation   = [settings stringForKey:@"userLocation"].length ? [settings stringForKey:@"userLocation"] : @"Выберите область";
-    
+//    self.userName       = [settings stringForKey:@"UserName"].length ? [settings stringForKey:@"UserName"] : @"";
+//    self.userLocation   = [settings stringForKey:@"userLocation"].length ? [settings stringForKey:@"userLocation"] : @"Выберите область";
+//    self.locationID     = [settings stringForKey:@"locationID"].length ? [settings stringForKey:@"locationID"] : @"0";
     [self.tableView reloadData];
 }
 
@@ -313,6 +387,9 @@ CG_INLINE BOOL is_4_inch()
 {
      dataConfirmCell.topTextField.text = self.userName;
      dataConfirmCell.botLabel.text     = self.userLocation;
+    
+    [dataConfirmCell.botButton addTarget:self action:@selector(onRegionButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.textFieldName = dataConfirmCell.topTextField;
     self.textFieldName.delegate = self;
 }
@@ -344,8 +421,10 @@ CG_INLINE BOOL is_4_inch()
 //    self.userName = [NSString stringWithFormat:@"%@%@",textField.text,string];
     return YES;
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    self.isChange = YES;
     self.userName = textField.text;
 }
 
@@ -368,6 +447,7 @@ CG_INLINE BOOL is_4_inch()
     self.currentIndex = index;
     [self deleteConfirm:[NSString stringWithFormat:@"%@, %@", car[@"carBrand"],car[@"carModel"]]];
 }
+
 -(void)deleteConfirm:(NSString*)car
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Настройки" message:[NSString stringWithFormat:@"Удалить %@ из гаража?",car] delegate:self cancelButtonTitle:@"Нет" otherButtonTitles: @"Да",nil];
@@ -379,7 +459,7 @@ CG_INLINE BOOL is_4_inch()
 {
     //GetText
     self.userName = self.textFieldName.text;
-    
+    __block NSString *name = self.userName;
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     
     [settings setBool:self.isEnableAuroRegister         forKey:@"isEnableAuroRegister"          ];
@@ -388,12 +468,41 @@ CG_INLINE BOOL is_4_inch()
     
     [settings setValue:self.userName     forKey:@"UserName"    ];
     [settings setValue:self.userLocation forKey:@"userLocation"];
-    
+    [settings setValue:self.locationID   forKey:@"locationID"];
+
     [settings synchronize];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Настройки" message:@"Успешно сохранено" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil];
-    [alertView show];
+    
+    if(self.isChange)
+    {
+        NSString *region   = [NSString stringWithFormat:@"%@", self.regionDict[@"region"]];
+        NSString *regionID = [NSString stringWithFormat:@"%@", self.regionDict[@"id"]];
+
+        [[GetUpdateUserInfo alloc] getUpdateInfoRegionID:regionID comment:name completionHandler:^{
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Настройки" message:@"Успешно сохранено" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil];
+            [alertView show];
+        } errorHandler:^{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Ошибка обновления данных" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil];
+            [alertView show];
+        }];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Настройки" message:@"Успешно сохранено" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles: nil];
+        [alertView show];
+    }
 }
 
+- (void)onRegionButton:(id)sender
+{
+    [self.textFieldName resignFirstResponder];
+    self.isChange = YES;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ChoiceRegion" bundle:nil];
+    ChoiceRegionViewController *choiceRegionViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChoiceRegionViewController"];
+    choiceRegionViewController.regionDict = self.regionDict;
+    choiceRegionViewController.notShow = YES;
+    [self.navigationController pushViewController:choiceRegionViewController animated:YES];
+}
 
 #pragma mark - Keyboard Notyfications Actions -
 

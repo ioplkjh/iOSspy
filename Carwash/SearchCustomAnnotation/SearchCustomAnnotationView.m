@@ -8,6 +8,7 @@
 
 #import "SearchCustomAnnotationView.h"
 
+
 @implementation SearchCustomAnnotationView
 
 - (id)initWithFrame:(CGRect)frame

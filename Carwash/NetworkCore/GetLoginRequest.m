@@ -15,7 +15,19 @@
                 errorHandler:(CompletionHandler)errorHandler
 {
     
+    NSString *tokenSTR = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+
+    
+    tokenSTR = [tokenSTR stringByReplacingOccurrencesOfString:@" " withString:@""];
+    tokenSTR = [tokenSTR stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    tokenSTR = [tokenSTR stringByReplacingOccurrencesOfString:@">" withString:@""];
+
+    if(tokenSTR == nil)
+        tokenSTR = @"";
+    
     NSDictionary *parameters = @{
+                                 @"device_type":@"2",
+                                 @"device_token":tokenSTR,
                                  @"login":phone,
                                  };
     
@@ -64,6 +76,5 @@
          });
      }];
 }
-
 
 @end
