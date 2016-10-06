@@ -1,0 +1,26 @@
+//
+//  PrefixHeader.pch
+//  Carwash
+//
+//  Created by Andrei Sabinin on 9/1/15.
+//  Copyright (c) 2015 Empty. All rights reserved.
+//
+
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import <MapKit/MapKit.h>
+
+#import "Defines.h"
+#import "SVProgressHUD.h"
+#import "LocationCore.h"
+#import "AppDelegate.h"
+
+#define SharedAppDelegate (AppDelegate*)[UIApplication sharedApplication].delegate
+
+#define kLocationManagerUpdateLocationNotification @"LocationManagerUpdateLocationNotification"
+
+#endif
+

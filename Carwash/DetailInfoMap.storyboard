@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Detail Info Map View Controller-->
+        <scene sceneID="cxk-ra-Gtu">
+            <objects>
+                <viewController storyboardIdentifier="DetailInfoMapViewController" id="gEt-Ye-VPX" customClass="DetailInfoMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oe8-bE-50K"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hhf-hE-Ldy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Mh-9a-etB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NRk-F9-g1U">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gEt-Ye-VPX" id="okZ-Mh-2jN"/>
+                                </connections>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4X-8m-SKE">
+                                <rect key="frame" x="20" y="520" width="560" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWo-Lq-4Qd">
+                                        <rect key="frame" x="8" y="8" width="544" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.67000000000000004" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Wne-Dj-I4l"/>
+                                    <constraint firstItem="PWo-Lq-4Qd" firstAttribute="leading" secondItem="u4X-8m-SKE" secondAttribute="leading" constant="8" id="es3-9T-LGr"/>
+                                    <constraint firstAttribute="trailing" secondItem="PWo-Lq-4Qd" secondAttribute="trailing" constant="8" id="gPS-eH-Fd0"/>
+                                    <constraint firstItem="PWo-Lq-4Qd" firstAttribute="top" secondItem="u4X-8m-SKE" secondAttribute="top" constant="8" id="kcN-3u-lnc"/>
+                                    <constraint firstAttribute="bottom" secondItem="PWo-Lq-4Qd" secondAttribute="bottom" constant="8" id="tM2-RZ-TOW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NRk-F9-g1U" firstAttribute="top" secondItem="9Mh-9a-etB" secondAttribute="top" id="Aru-eT-oN2"/>
+                            <constraint firstItem="NRk-F9-g1U" firstAttribute="leading" secondItem="9Mh-9a-etB" secondAttribute="leading" id="Ht1-O8-oiJ"/>
+                            <constraint firstItem="Hhf-hE-Ldy" firstAttribute="top" secondItem="NRk-F9-g1U" secondAttribute="bottom" id="I99-xr-vg2"/>
+                            <constraint firstItem="u4X-8m-SKE" firstAttribute="leading" secondItem="9Mh-9a-etB" secondAttribute="leading" constant="20" id="ODB-WD-lgA"/>
+                            <constraint firstAttribute="trailing" secondItem="NRk-F9-g1U" secondAttribute="trailing" id="Ohc-Ux-ZSZ"/>
+                            <constraint firstAttribute="trailing" secondItem="u4X-8m-SKE" secondAttribute="trailing" constant="20" id="TiZ-XQ-JtA"/>
+                            <constraint firstItem="Hhf-hE-Ldy" firstAttribute="top" secondItem="u4X-8m-SKE" secondAttribute="bottom" constant="20" id="fDS-fO-NOc"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="infoLabel" destination="PWo-Lq-4Qd" id="fe6-KR-m6U"/>
+                        <outlet property="infoView" destination="u4X-8m-SKE" id="qRV-Lc-4XX"/>
+                        <outlet property="mapView" destination="NRk-F9-g1U" id="HCi-Vm-r92"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OEN-91-HpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="168" y="205"/>
+        </scene>
+    </scenes>
+</document>

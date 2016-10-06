@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fon_bubbles" translatesAutoresizingMaskIntoConstraints="NO" id="31x-Nn-66Q">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="31x-Nn-66Q" secondAttribute="height" multiplier="3:2" id="p0v-Mo-5j8"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="rRN-ky-uuL">
+                    <rect key="frame" x="120" y="120" width="240" height="240"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="fM6-Oj-gNa"/>
+                        <constraint firstAttribute="height" constant="240" id="weJ-Yq-OaC"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.10588235294117647" green="0.13333333333333333" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="rRN-ky-uuL" secondAttribute="centerX" id="242-Zm-vfc"/>
+                <constraint firstItem="31x-Nn-66Q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4Oy-Bc-Ksq"/>
+                <constraint firstAttribute="centerY" secondItem="rRN-ky-uuL" secondAttribute="centerY" id="E0M-fI-802"/>
+                <constraint firstItem="31x-Nn-66Q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="faI-n0-SUR"/>
+                <constraint firstAttribute="trailing" secondItem="31x-Nn-66Q" secondAttribute="trailing" id="kOr-q0-4Ga"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="548" y="455"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="fon_bubbles" width="538" height="538"/>
+        <image name="logo" width="179" height="247"/>
+    </resources>
+</document>
