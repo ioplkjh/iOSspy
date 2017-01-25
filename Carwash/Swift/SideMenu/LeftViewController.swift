@@ -89,7 +89,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
         let exitButton: UIButton = UIButton(type:UIButtonType.Custom) as UIButton
 //        .buttonWithType(UIButtonType.Custom) as! UIButton
         exitButton.frame = CGRectMake(0.0, viewFooter.frame.size.height - 44.0, self.view.frame.size.width, 44.0)
-        exitButton.addTarget(self, action: Selector("onExitButton:"), forControlEvents: UIControlEvents.TouchUpInside)
+        exitButton.addTarget(self, action: #selector(LeftViewController.onExitButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         exitButton.setTitle("ВЫХОД", forState: UIControlState.Normal)
         exitButton.setTitleColor(UIColor(white: 0.0, alpha: 1.0), forState: UIControlState.Normal)
         exitButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 170)
