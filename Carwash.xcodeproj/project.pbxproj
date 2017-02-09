@@ -1100,6 +1100,7 @@
 					CA0295D51B94F82100950687 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = GU9HEWK6G4;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1529,6 +1530,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Carwash/Swift/SideMenu/Carwash-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1560,6 +1562,7 @@
 				SHARED_PRECOMPS_DIR = Carwash/PrefixHeader.pch;
 				SWIFT_OBJC_BRIDGING_HEADER = "Carwash/Swift/SideMenu/Carwash-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
