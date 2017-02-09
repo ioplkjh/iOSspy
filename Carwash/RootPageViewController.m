@@ -92,7 +92,7 @@
     CLLocationCoordinate2D coordinate = location.coordinate;
     
     if(coordinate.latitude == 0 || coordinate.longitude == 0)
-        coordinate = CLLocationCoordinate2DMake(52.721234, 41.451799);
+        coordinate = CLLocationCoordinate2DMake(52.755833, 41.462239);
     
     MKCoordinateSpan span = MKCoordinateSpanMake(0.01, 0.01);
     [self.mapView setRegion:MKCoordinateRegionMake(coordinate, span) animated:YES];
@@ -107,7 +107,7 @@
 
     if(coordinate.latitude == 0 || coordinate.longitude == 0)
     {
-        coordinate = CLLocationCoordinate2DMake(52.721234, 41.451799);
+        coordinate = CLLocationCoordinate2DMake(52.755833, 41.462239);
         [self performSelector:@selector(request) withObject:nil afterDelay:5.0];
 
     }
@@ -134,7 +134,7 @@
     CLLocationCoordinate2D coordinate = location.coordinate;
     if(coordinate.latitude == 0 || coordinate.latitude == 0)
     {
-        coordinate = CLLocationCoordinate2DMake(52.721234, 41.451799);
+        coordinate = CLLocationCoordinate2DMake(52.755833, 41.462239);
     }
 
     

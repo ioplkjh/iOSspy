@@ -1524,6 +1524,7 @@
 					"$(PROJECT_DIR)/Carwash/External/GoogleAnalytics",
 				);
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.allmoyki.taifun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SHARED_PRECOMPS_DIR = Carwash/PrefixHeader.pch;
@@ -1557,6 +1558,7 @@
 					"$(PROJECT_DIR)/Carwash/External/GoogleAnalytics",
 				);
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.allmoyki.taifun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SHARED_PRECOMPS_DIR = Carwash/PrefixHeader.pch;

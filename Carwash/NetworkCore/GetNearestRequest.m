@@ -36,9 +36,9 @@
     
     NSDictionary *parameters = @{
                                  @"access_token":access_token,
-                                 @"max_distance":max_distance,
-                                 @"latitude" :latitude,
-                                 @"longitude":longitude,
+                                 @"max_distance":@0.01,
+                                 @"latitude" :@52.755833,
+                                 @"longitude":@41.462239,
                                  @"local_time":dateString
                                  };
     
