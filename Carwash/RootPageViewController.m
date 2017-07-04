@@ -107,7 +107,7 @@
 
     if(coordinate.latitude == 0 || coordinate.longitude == 0)
     {
-        coordinate = CLLocationCoordinate2DMake(52.755833, 41.462239);
+        coordinate = CLLocationCoordinate2DMake(55.057154, 60.103154);
         [self performSelector:@selector(request) withObject:nil afterDelay:5.0];
 
     }
@@ -134,7 +134,7 @@
     CLLocationCoordinate2D coordinate = location.coordinate;
     if(coordinate.latitude == 0 || coordinate.latitude == 0)
     {
-        coordinate = CLLocationCoordinate2DMake(52.755833, 41.462239);
+        coordinate = CLLocationCoordinate2DMake(55.057154, 60.103154);
     }
 
     
