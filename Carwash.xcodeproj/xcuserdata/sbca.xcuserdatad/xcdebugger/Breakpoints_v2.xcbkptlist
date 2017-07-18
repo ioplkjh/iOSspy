@@ -17,6 +17,38 @@
             endingLineNumber = "17"
             landmarkName = "infoLabel"
             landmarkType = "19">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SearchCustomAnnotation infoLabel]"
+                  moduleName = "CARWASH"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sbca/Documents/iOSspy/Carwash/SearchCustomAnnotation/SearchCustomAnnotation.h"
+                  timestampString = "522066946.083571"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SearchCustomAnnotation setInfoLabel:]"
+                  moduleName = "CARWASH"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sbca/Documents/iOSspy/Carwash/SearchCustomAnnotation/SearchCustomAnnotation.h"
+                  timestampString = "522066946.085997"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "49">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

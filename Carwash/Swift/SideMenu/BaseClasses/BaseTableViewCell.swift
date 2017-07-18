@@ -7,7 +7,7 @@
 //
 import UIKit
 
-public class BaseTableViewCell : UITableViewCell {
+open class BaseTableViewCell : UITableViewCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleForCellLabel: UILabel!
@@ -29,10 +29,10 @@ public class BaseTableViewCell : UITableViewCell {
         setup()
     }
     
-    public func setup() {
+    open func setup() {
     }
     
-    override public func setHighlighted(highlighted: Bool, animated: Bool) {
+    override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
             self.alpha = 0.4
         } else {
@@ -41,7 +41,7 @@ public class BaseTableViewCell : UITableViewCell {
     }
     
     // ignore the default handling
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override open func setSelected(_ selected: Bool, animated: Bool) {
     }
   
 }

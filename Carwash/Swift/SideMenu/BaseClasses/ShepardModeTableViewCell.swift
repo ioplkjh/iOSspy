@@ -10,11 +10,11 @@ import UIKit
 
 @objc protocol ShepardModeTableViewCellDelegate : NSObjectProtocol {
     
-    optional func activeShepardMode(active: Bool)
+    @objc optional func activeShepardMode(_ active: Bool)
     
 }
 
-public class ShepardModeTableViewCell: UITableViewCell {
+open class ShepardModeTableViewCell: UITableViewCell {
     
     var delegate: ShepardModeTableViewCellDelegate?
     
@@ -33,15 +33,15 @@ public class ShepardModeTableViewCell: UITableViewCell {
         self.setup()
     }
 
-    public func setup() {
+    open func setup() {
     }
     
     // ignore the default handling
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override open func setSelected(_ selected: Bool, animated: Bool) {
 
     }
     
-    @IBAction func activeShepardModeDidClicked(sender: UISwitch) {
+    @IBAction func activeShepardModeDidClicked(_ sender: UISwitch) {
 
 //        DBUserManager.sharedManager().user.isActiveShepard = sender.on
 //        

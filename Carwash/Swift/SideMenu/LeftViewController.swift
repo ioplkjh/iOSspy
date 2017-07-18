@@ -8,21 +8,21 @@
 import UIKit
 
 enum LeftMenu: Int {
-    case Main = 0
-    case Search
-    case Order
-    case Settings
-    case ShepardsMode
+    case main = 0
+    case search
+    case order
+    case settings
+    case shepardsMode
 }
 
 enum ActionSheetMenu: Int {
-    case Cancel = 0
-    case TakePhoto
-    case GetWithLibrary
+    case cancel = 0
+    case takePhoto
+    case getWithLibrary
 }
 
 protocol LeftMenuProtocol : class {
-    func changeViewController(menu: LeftMenu)
+    func changeViewController(_ menu: LeftMenu)
 }
 
 class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegate,UITableViewDataSource
@@ -59,41 +59,41 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
         super.viewDidLoad()
         
         let viewFooter = UIView()
-        viewFooter.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, (self.view.frame.height-64.0) - (44.0*4))
+        viewFooter.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: (self.view.frame.height-64.0) - (44.0*4))
         viewFooter.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 0.0)
         
         let viewFooterUnder = UIView()
-        viewFooterUnder.frame = CGRectMake(0.0, viewFooter.frame.size.height - 44.0, self.view.frame.size.width, 44.0)
+        viewFooterUnder.frame = CGRect(x: 0.0, y: viewFooter.frame.size.height - 44.0, width: self.view.frame.size.width, height: 44.0)
         viewFooterUnder.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
         
         viewFooter.addSubview(viewFooterUnder)
         
         let lineBot = UIView()
-        lineBot.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 1.0)
+        lineBot.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 1.0)
         lineBot.backgroundColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
         viewFooterUnder.addSubview(lineBot)
         
         let line = UIView()
-        line.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, 1.0)
+        line.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 1.0)
         line.backgroundColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
         viewFooter.addSubview(line)
         
         let viewFooterImage = UIImageView()
-        viewFooterImage.frame = CGRectMake(8.0, viewFooter.frame.size.height - 44.0, 44.0, 44.0)
+        viewFooterImage.frame = CGRect(x: 8.0, y: viewFooter.frame.size.height - 44.0, width: 44.0, height: 44.0)
         viewFooterImage.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 0.0)
-        viewFooterImage.contentMode = UIViewContentMode.Center
+        viewFooterImage.contentMode = UIViewContentMode.center
         viewFooterImage.image = UIImage(named: "icon_vhod_vyhod")
         
         viewFooter.addSubview(viewFooterImage)
 
-        let exitButton: UIButton = UIButton(type:UIButtonType.Custom) as UIButton
+        let exitButton: UIButton = UIButton(type:UIButtonType.custom) as UIButton
 //        .buttonWithType(UIButtonType.Custom) as! UIButton
-        exitButton.frame = CGRectMake(0.0, viewFooter.frame.size.height - 44.0, self.view.frame.size.width, 44.0)
-        exitButton.addTarget(self, action: #selector(LeftViewController.onExitButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        exitButton.setTitle("ВЫХОД", forState: UIControlState.Normal)
-        exitButton.setTitleColor(UIColor(white: 0.0, alpha: 1.0), forState: UIControlState.Normal)
+        exitButton.frame = CGRect(x: 0.0, y: viewFooter.frame.size.height - 44.0, width: self.view.frame.size.width, height: 44.0)
+        exitButton.addTarget(self, action: #selector(LeftViewController.onExitButton(_:)), for: UIControlEvents.touchUpInside)
+        exitButton.setTitle("ВЫХОД", for: UIControlState())
+        exitButton.setTitleColor(UIColor(white: 0.0, alpha: 1.0), for: UIControlState())
         exitButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 170)
-        exitButton.titleLabel?.font = UIFont.systemFontOfSize(13)
+        exitButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
 
         viewFooter.addSubview(exitButton)
         
@@ -103,14 +103,14 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
         self.tableView.separatorColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
         
         var storyboard = UIStoryboard(name: "Search", bundle: nil)
-        self.searchNavigationViewController = storyboard.instantiateViewControllerWithIdentifier("SearchNavigationController") as! UINavigationController
+        self.searchNavigationViewController = storyboard.instantiateViewController(withIdentifier: "SearchNavigationController") as! UINavigationController
         
         
         storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        self.settingsNavigationControler = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController") as! UINavigationController
+        self.settingsNavigationControler = storyboard.instantiateViewController(withIdentifier: "SettingsNavigationController") as! UINavigationController
 
         storyboard = UIStoryboard(name: "OrderBoard", bundle: nil)
-        self.ordersNavigationControler = storyboard.instantiateViewControllerWithIdentifier("OrdersNavigationControler") as! UINavigationController
+        self.ordersNavigationControler = storyboard.instantiateViewController(withIdentifier: "OrdersNavigationControler") as! UINavigationController
         
 //        storyboard = UIStoryboard(name: "Help", bundle: nil)
 //        let helpViewController = storyboard.instantiateViewControllerWithIdentifier("NavigationForHelpViewController") as! UINavigationController
@@ -147,11 +147,11 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "_goToMainScreen", name: kInvalidToken, object: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
@@ -159,29 +159,29 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
 //        return 44
 //    }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellID = "cellID"
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellID)
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellID)
         
         cell.textLabel?.text = menus[indexPath.row]
-        cell.textLabel?.font = UIFont.systemFontOfSize(13)
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
         cell.imageView?.image = UIImage(named: images[indexPath.row])
-        cell.imageView?.contentMode = UIViewContentMode.Center
+        cell.imageView?.contentMode = UIViewContentMode.center
         cell.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
-        cell.selectionStyle = UITableViewCellSelectionStyle.None;
+        cell.selectionStyle = UITableViewCellSelectionStyle.none;
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section != 0) {
             return
         }
@@ -191,26 +191,26 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
         }
     }
     
-    func onExitButton(button: UIButton)
+    func onExitButton(_ button: UIButton)
     {
-        NSNotificationCenter.defaultCenter().postNotificationName("closeMainController", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "closeMainController"), object: nil)
     }
     
-    func changeViewController(menu: LeftMenu) {
+    func changeViewController(_ menu: LeftMenu) {
         switch menu {
-        case .Main:
+        case .main:
             self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
             break
-        case .Search:
+        case .search:
             self.slideMenuController()?.changeMainViewController(self.searchNavigationViewController, close: true)
             break
-        case .Order:
+        case .order:
             self.slideMenuController()?.changeMainViewController(self.ordersNavigationControler, close: true)
             break
-        case .Settings:
+        case .settings:
             self.slideMenuController()?.changeMainViewController(self.settingsNavigationControler, close: true)
             break
-        case .ShepardsMode:
+        case .shepardsMode:
             break
         default:
             break
@@ -266,7 +266,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol,UITableViewDelegat
 
 // MARK: - InternalMethods -
     
-    @IBAction func logoutButtonDidClicked(sender: UIButton)
+    @IBAction func logoutButtonDidClicked(_ sender: UIButton)
     {
 //        LogoutRequest().logoutRequestCompletionHandler({ () -> Void in
 //            dispatch_async(dispatch_get_main_queue()) {
