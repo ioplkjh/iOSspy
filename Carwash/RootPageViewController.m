@@ -180,6 +180,18 @@
     MKCoordinateSpan span = MKCoordinateSpanMake(self.lat, self.lon);
     [self.mapView setRegion:MKCoordinateRegionMake(self.mapView.region.center, span) animated:YES];
 }
+- (IBAction)onDoOrder:(id)sender {
+    NSDictionary *dict = (NSDictionary*)self.arrayData[0];//annotationView.object;
+    UIStoryboard *storyborad = [UIStoryboard storyboardWithName:@"WashPage" bundle:nil];
+    WashPageViewController *washPageViewController = [storyborad instantiateViewControllerWithIdentifier:@"WashPageViewController"];
+    NSInteger typeCarWash = [dict[@"car_wash_type_id"] integerValue];
+    if(typeCarWash == 1)
+    {
+        washPageViewController.isOfflineWash = YES;
+    }
+    washPageViewController.dictInfo = dict;
+    [self.navigationController pushViewController:washPageViewController animated:YES];
+}
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
